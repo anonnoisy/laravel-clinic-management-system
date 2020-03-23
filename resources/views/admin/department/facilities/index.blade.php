@@ -19,9 +19,14 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
-                    <h5 class="mb-10">Lists Of Department Facility</h5>
-                    <p class="mb-25">Use <code>table-responsive{-sm|-md|-lg|-xl}</code> as needed to create responsive tables up to a particular breakpoint.</p>
-                    <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::department::facility::create') }}" class="btn btn-gradient-primary mb-3">Add Department Facility</a>
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <div>{{$error}}</div>
+                        @endforeach
+                    @endif
+                    <h5 class="mb-10">Manage Department Facility</h5>
+                    <p class="mb-25">This list facilities for department {{ $department->name }}, you can manage facility</p>
+                    <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::department::facility::create', ['department' => $department->id]) }}" class="btn btn-gradient-primary mb-3">Add Department Facility</a>
                     <div class="row">
                         <div class="col-sm">
                             <div class="table-wrap">
@@ -35,18 +40,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Herman Beck</td>
-                                                <td>Oct 16, 2016</td>
-                                                <td>
-                                                    <a href="{{ route('admin::department::facility::edit', ['facility' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($departmentFacilities as $facility)
+                                                <tr>
+                                                    <td>{{ $facility->title }}</td>
+                                                    <td>{{ $facility->description }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::department::facility::edit', [
+                                                            'department' => $department->id,
+                                                            'facility' => $facility->id
+                                                        ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::department::facility::destroy', [
+                                                            'department' => $department->id,
+                                                            'facility' => $facility
+                                                        ]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="3">No facility found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

@@ -18,7 +18,6 @@
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
                     <h5 class="mb-10">Manage departments</h5>
-                    <p class="mb-25">Use <code>table-responsive{-sm|-md|-lg|-xl}</code> as needed to create responsive tables up to a particular breakpoint.</p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::department::create') }}" class="btn btn-gradient-primary mb-3">Add Department</a>
                     <div class="row">
                         <div class="col-sm">
@@ -27,27 +26,39 @@
                                     <table class="table mb-0">
                                         <thead>
                                             <tr>
-                                                <th>Icon</th>
+                                                <th>#</th>
                                                 <th>Name</th>
                                                 <th>Description</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Icon</td>
-                                                <td>Herman Beck</td>
-                                                <td>Oct 16, 2016</td>
-                                                <td>
-                                                    <a href="{{ route('admin::department::facility::index') }}" class="btn btn-secondary btn-sm mr-25">Manage facilities</a>
-                                                    <a href="{{ route('admin::department::edit', ['department' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($departments as $department)
+                                                <tr>
+                                                    <td>
+                                                        @if (!empty($department->image_url))
+                                                            <img src="{{ $department->signed_image_url }}" alt="Department image" width="100">
+                                                        @else
+                                                            <td>No image</td>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $department->name }}</td>
+                                                    <td>{{ $department->description }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::department::facility::index', ['department' => $department->id]) }}" class="btn btn-secondary btn-sm mr-25">Manage facilities</a>
+                                                        <a href="{{ route('admin::department::edit', ['department' => $department->id]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::department::destroy', ['department' => $department->id]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="4">No department found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

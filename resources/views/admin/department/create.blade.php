@@ -17,7 +17,7 @@
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
                     <h5 class="mb-10">Add New Department</h5>
-                    <form action="{{ route('admin::department::store') }}" method="post">
+                    <form action="{{ route('admin::department::store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12 form-group">
@@ -35,7 +35,7 @@
                             </div>
                             <div class="col-sm-12 form-group">
                                 <label for="department_icon">Department Icon</label>
-                                <input type="file" id="department_icon" class="form-control form-control-sm pb-2"/>
+                                <input type="file" id="department_icon" name="image" class="form-control form-control-sm pb-2"/>
                             </div>
                             <div class="col-sm-12">
                                 <button class="btn btn-primary" type="submit">Save department</button>

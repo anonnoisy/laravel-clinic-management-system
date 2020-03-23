@@ -26,17 +26,17 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         Route::get('show/{department}', 'DepartmentController@show')->name('show');
         Route::get('edit/{department}', 'DepartmentController@edit')->name('edit');
         Route::put('update/{department}', 'DepartmentController@update')->name('update');
-        Route::delete('delete/{department}', 'DepartmentController@delete')->name('delete');
+        Route::delete('delete/{department}', 'DepartmentController@destroy')->name('destroy');
 
         // Route for department facility
-        Route::prefix('facility')->name('facility::')->group(function() {
+        Route::prefix('{department}/facility')->name('facility::')->group(function() {
             Route::get('index', 'DepartmentFacilityController@index')->name('index');
             Route::get('create', 'DepartmentFacilityController@create')->name('create');
             Route::post('store', 'DepartmentFacilityController@store')->name('store');
             Route::get('show/{facility}', 'DepartmentFacilityController@show')->name('show');
             Route::get('edit/{facility}', 'DepartmentFacilityController@edit')->name('edit');
             Route::put('update/{facility}', 'DepartmentFacilityController@update')->name('update');
-            Route::delete('delete/{facility}', 'DepartmentFacilityController@delete')->name('delete');
+            Route::delete('delete/{facility}', 'DepartmentFacilityController@destroy')->name('destroy');
         });
     });
 
