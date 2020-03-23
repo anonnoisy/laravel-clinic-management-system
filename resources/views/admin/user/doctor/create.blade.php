@@ -15,9 +15,10 @@
     <div class="card-body">
         <div class="row">
             <div class="col-xl-12">
+                @include('layouts.components.alert')
                 <section class="hk-sec-wrapper">
                     <h5 class="mb-10">Add New Doctor</h5>
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin::user::doctor::store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12 col-md-6 form-group">
@@ -52,11 +53,16 @@
                                 <label for="department">Department</label>
                                 <select name="department_id" id="department" class="form-control form-control-sm pb-2">
                                     <option>Select department</option>
+                                    @forelse ($departments as $department)
+                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    @empty
+                                        <option>Please create new department, on Department menu</option>
+                                    @endforelse
                                 </select>
                             </div>
                             <div class="col-sm-12 col-md-12 form-group">
-                                <label for="photo">Photo</label>
-                                <input class="form-control form-control-sm pb-2" type="file" id="photo" name="photo">
+                                <label for="image">image</label>
+                                <input class="form-control form-control-sm pb-2" type="file" id="image" name="image">
                             </div>
                             <div class="col-sm-12 col-md-12 form-group">
                                 <label for="department">Profile</label>

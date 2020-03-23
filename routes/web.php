@@ -48,8 +48,8 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'DoctorController@create')->name('create');
             Route::post('store', 'DoctorController@store')->name('store');
             Route::get('show/{doctor}', 'DoctorController@show')->name('show');
-            Route::get('edit/{doctor}', 'DoctorController@edit')->name('edit');
-            Route::put('update/{doctor}', 'DoctorController@update')->name('update');
+            Route::get('{user}/edit/{doctor}', 'DoctorController@edit')->name('edit');
+            Route::put('{user}/update/{doctor}', 'DoctorController@update')->name('update');
             Route::delete('delete/{doctor}', 'DoctorController@delete')->name('delete');
         });
 
