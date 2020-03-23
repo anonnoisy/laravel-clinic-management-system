@@ -19,11 +19,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
-                    @if ($errors->any())
-                        @foreach ($errors->all() as $error)
-                            <div>{{$error}}</div>
-                        @endforeach
-                    @endif
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage Department Facility</h5>
                     <p class="mb-25">This list facilities for department {{ $department->name }}, you can manage facility</p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::department::facility::create', ['department' => $department->id]) }}" class="btn btn-gradient-primary mb-3">Add Department Facility</a>

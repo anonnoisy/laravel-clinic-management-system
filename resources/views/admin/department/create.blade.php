@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Add New Department</h5>
                     <form action="{{ route('admin::department::store') }}" method="post" enctype="multipart/form-data">
                         @csrf

@@ -17,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage departments</h5>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::department::create') }}" class="btn btn-gradient-primary mb-3">Add Department</a>
                     <div class="row">

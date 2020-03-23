@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Edit Department</h5>
                     <form action="{{ route('admin::department::update', $department->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -24,11 +25,6 @@
                             <div class="col-sm-12 form-group">
                                 <label for="department_name">Department name</label>
                                 <input class="form-control form-control-sm mt-15 @error('email') is-invalid @enderror" id="department_name"type="text" name="name" value="{{ old('name', $department->name) }}" placeholder="Name of department">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                             <div class="col-sm-12 form-group">
                                 <label for="department_description">Department description</label>

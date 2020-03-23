@@ -21,12 +21,8 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <section class="hk-sec-wrapper">
+                            @include('layouts.components.alert')
                             <h5 class="mb-10">Add New Department Facilities</h5>
-                            @if ($errors->any())
-                                @foreach ($errors->all() as $error)
-                                    <div>{{$error}}</div>
-                                @endforeach
-                            @endif
                             <form action="{{ route('admin::department::facility::store', ['department' => $department->id]) }}" method="post">
                                 @csrf
                                 <input type="hidden" name="department_id" value="{{ $department->id }}">

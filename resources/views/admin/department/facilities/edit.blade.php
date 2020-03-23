@@ -19,6 +19,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Add New Department Facilities</h5>
                     <form action="{{ route('admin::department::facility::update', [
                         'department' => $department->id,
