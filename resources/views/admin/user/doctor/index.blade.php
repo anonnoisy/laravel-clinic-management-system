@@ -57,7 +57,9 @@
                                                             'user' => $doctor->user_id,
                                                             'doctor' => $doctor->id
                                                         ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                        <form action="" method="post" style="display: inline">
+                                                        <form action="{{ route('admin::user::doctor::destroy', [
+                                                            'doctor' => $doctor->id
+                                                        ]) }}" method="post" style="display: inline">
                                                             @csrf
                                                             @method('DELETE')
                                                             <button class="btn btn-danger btn-sm mr-25">Delete</button>

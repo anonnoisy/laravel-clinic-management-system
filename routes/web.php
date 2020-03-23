@@ -50,7 +50,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{doctor}', 'DoctorController@show')->name('show');
             Route::get('{user}/edit/{doctor}', 'DoctorController@edit')->name('edit');
             Route::put('{user}/update/{doctor}', 'DoctorController@update')->name('update');
-            Route::delete('delete/{doctor}', 'DoctorController@delete')->name('delete');
+            Route::delete('delete/{doctor}', 'DoctorController@destroy')->name('destroy');
         });
 
         // Route for nurses management
