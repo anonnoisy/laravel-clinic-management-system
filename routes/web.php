@@ -70,9 +70,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'PatientController@create')->name('create');
             Route::post('store', 'PatientController@store')->name('store');
             Route::get('show/{patient}', 'PatientController@show')->name('show');
-            Route::get('edit/{patient}', 'PatientController@edit')->name('edit');
-            Route::put('update/{patient}', 'PatientController@update')->name('update');
-            Route::delete('delete/{patient}', 'PatientController@delete')->name('delete');
+            Route::get('{user}/edit/{patient}', 'PatientController@edit')->name('edit');
+            Route::put('{user}/update/{patient}', 'PatientController@update')->name('update');
+            Route::delete('delete/{patient}', 'PatientController@destroy')->name('destroy');
         });
 
         // Route for pharmacist management
