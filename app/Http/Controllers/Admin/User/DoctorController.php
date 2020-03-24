@@ -177,11 +177,12 @@ class DoctorController extends Controller
      * 
      * @author Rifky Sulta Karisma A <batuhc105@gmail.com>
      */
-    public function destroy(Doctor $doctor)
+    public function destroy(User $user, Doctor $doctor)
     {
         try {
-            DB::transaction(function () use ($doctor) {
-                return $doctor->delete();
+            DB::transaction(function () use ($doctor, $user) {
+                $doctor->delete();
+                return $user->delete();
             });
         } catch (\Exception $e) {
             return redirect()->back()->with('error_message', 'Sorry, something went wrong, please try again!');

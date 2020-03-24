@@ -151,11 +151,12 @@ class NurseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nurse $nurse)
+    public function destroy(User $user, Nurse $nurse)
     {
         try {
-            DB::transaction(function () use ($nurse) {
-                return $nurse->delete();
+            DB::transaction(function () use ($nurse, $user) {
+                $nurse->delete();
+                return $user->delete();
             }, 5);
         } catch (\Exception $e) {
             return redirect()->back()->with('error_message', 'Sorry, something went wrong, please try again!');

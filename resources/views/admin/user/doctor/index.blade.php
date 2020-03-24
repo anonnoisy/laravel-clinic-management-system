@@ -56,8 +56,9 @@
                                                         <a href="{{ route('admin::user::doctor::edit', [
                                                             'user' => $doctor->user_id,
                                                             'doctor' => $doctor->id
-                                                        ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                            ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
                                                         <form action="{{ route('admin::user::doctor::destroy', [
+                                                            'user' => $doctor->user_id,
                                                             'doctor' => $doctor->id
                                                         ]) }}" method="post" style="display: inline">
                                                             @csrf

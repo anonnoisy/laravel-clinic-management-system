@@ -50,7 +50,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{doctor}', 'DoctorController@show')->name('show');
             Route::get('{user}/edit/{doctor}', 'DoctorController@edit')->name('edit');
             Route::put('{user}/update/{doctor}', 'DoctorController@update')->name('update');
-            Route::delete('delete/{doctor}', 'DoctorController@destroy')->name('destroy');
+            Route::delete('{user}/delete/{doctor}', 'DoctorController@destroy')->name('destroy');
         });
 
         // Route for nurses management
@@ -61,7 +61,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{nurse}', 'NurseController@show')->name('show');
             Route::get('{user}/edit/{nurse}', 'NurseController@edit')->name('edit');
             Route::put('{user}/update/{nurse}', 'NurseController@update')->name('update');
-            Route::delete('delete/{nurse}', 'NurseController@destroy')->name('destroy');
+            Route::delete('{user}/delete/{nurse}', 'NurseController@destroy')->name('destroy');
         });
 
         // Route for patients management
@@ -72,7 +72,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{patient}', 'PatientController@show')->name('show');
             Route::get('{user}/edit/{patient}', 'PatientController@edit')->name('edit');
             Route::put('{user}/update/{patient}', 'PatientController@update')->name('update');
-            Route::delete('delete/{patient}', 'PatientController@destroy')->name('destroy');
+            Route::delete('{user}/delete/{patient}', 'PatientController@destroy')->name('destroy');
         });
 
         // Route for pharmacist management

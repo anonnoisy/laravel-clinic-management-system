@@ -170,11 +170,12 @@ class PatientController extends Controller
      * 
      * @author Rifky Sulta Karisma A <batuhc105@gmail.com>
      */
-    public function destroy(Patient $patient)
+    public function destroy(User $user, Patient $patient)
     {
         try {
-            DB::transaction(function () use ($patient) {
-                return $patient->delete();
+            DB::transaction(function () use ($patient, $user) {
+                $patient->delete();
+                return $user->delete();
             }, 5);
         } catch (\Exception $e) {
             return redirect()->back()->with('error_message', 'Sorry, something went wrong, please try again!');
