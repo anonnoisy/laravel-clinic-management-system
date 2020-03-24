@@ -81,9 +81,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'PharmacistController@create')->name('create');
             Route::post('store', 'PharmacistController@store')->name('store');
             Route::get('show/{pharmacist}', 'PharmacistController@show')->name('show');
-            Route::get('edit/{pharmacist}', 'PharmacistController@edit')->name('edit');
-            Route::put('update/{pharmacist}', 'PharmacistController@update')->name('update');
-            Route::delete('delete/{pharmacist}', 'PharmacistController@delete')->name('delete');
+            Route::get('{user}/edit/{pharmacist}', 'PharmacistController@edit')->name('edit');
+            Route::put('{user}/update/{pharmacist}', 'PharmacistController@update')->name('update');
+            Route::delete('{user}/delete/{pharmacist}', 'PharmacistController@destroy')->name('destroy');
         });
 
         // Route for laboratorist management

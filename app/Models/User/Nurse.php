@@ -15,11 +15,7 @@ class Nurse extends Model
         'mobile_phone',
         'home_phone',
         'address',
-        'blood_group',
         'image_url',
-        'birth_date',
-        'age',
-        'sex',
     ];
 
     protected $appends = [
@@ -28,7 +24,7 @@ class Nurse extends Model
     ];
 
     /**
-     * function for get full name of patient
+     * function for get full name of nurse
      *
      * @return string
      * @author Rifky Sulta Karisma A <batuhc105@gmail.com>

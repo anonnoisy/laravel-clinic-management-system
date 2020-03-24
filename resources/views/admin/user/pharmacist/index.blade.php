@@ -17,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage Pharmacists</h5>
                     <p class="mb-25"></p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::user::pharmacist::create') }}" class="btn btn-gradient-primary mb-3">Add Pharmacist</a>
@@ -30,25 +31,45 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Phone</th>
+                                                <th>Mobile phone</th>
+                                                <th>Address</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Photo</td>
-                                                <td>Setyo Wirawan</td>
-                                                <td>doctor@email.com</td>
-                                                <td>+8232124882</td>
-                                                <td>
-                                                    <a href="{{ route('admin::user::pharmacist::edit') }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($pharmacists as $pharmacist)
+                                                <tr>
+                                                    <td>
+                                                        @if (!empty($pharmacist->signed_image_url))
+                                                            <img src="{{ $pharmacist->signed_image_url }}" alt="Pharmacist image" width="100">
+                                                        @else
+                                                            No image
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $pharmacist->name }}</td>
+                                                    <td>{{ $pharmacist->email }}</td>
+                                                    <td>{{ $pharmacist->mobile_phone }}</td>
+                                                    <td>{{ $pharmacist->address }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::user::pharmacist::edit', [
+                                                            'user' => $pharmacist->user_id,
+                                                            'pharmacist' => $pharmacist->id
+                                                            ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::user::pharmacist::destroy', [
+                                                            'user' => $pharmacist->user_id,
+                                                            'pharmacist' => $pharmacist->id
+                                                        ]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6">No pharmacist found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
