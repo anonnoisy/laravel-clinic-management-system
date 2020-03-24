@@ -59,9 +59,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'NurseController@create')->name('create');
             Route::post('store', 'NurseController@store')->name('store');
             Route::get('show/{nurse}', 'NurseController@show')->name('show');
-            Route::get('edit/{nurse}', 'NurseController@edit')->name('edit');
-            Route::put('update/{nurse}', 'NurseController@update')->name('update');
-            Route::delete('delete/{nurse}', 'NurseController@delete')->name('delete');
+            Route::get('{user}/edit/{nurse}', 'NurseController@edit')->name('edit');
+            Route::put('{user}/update/{nurse}', 'NurseController@update')->name('update');
+            Route::delete('delete/{nurse}', 'NurseController@destroy')->name('destroy');
         });
 
         // Route for patients management

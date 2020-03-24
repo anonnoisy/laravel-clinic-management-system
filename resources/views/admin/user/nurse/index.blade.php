@@ -17,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage Nurses</h5>
                     <p class="mb-25"></p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::user::nurse::create') }}" class="btn btn-gradient-primary mb-3">Add Nurse</a>
@@ -30,25 +31,44 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Phone</th>
+                                                <th>Mobile phone</th>
+                                                <th>Address</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse($nurses as $nurse)
                                             <tr>
-                                                <td>Photo</td>
-                                                <td>Setyo Wirawan</td>
-                                                <td>doctor@email.com</td>
-                                                <td>+8232124882</td>
                                                 <td>
-                                                    <a href="{{ route('admin::user::nurse::edit', ['nurse' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
+                                                    @if (!empty($department->image_url))
+                                                        <img src="{{ $department->signed_image_url }}" alt="Department image" width="100">
+                                                    @else
+                                                        No image
+                                                    @endif
+                                                </td>
+                                                <td>{{ $nurse->name }}</td>
+                                                <td>{{ $nurse->email }}</td>
+                                                <td>{{ $nurse->mobile_phone }}</td>
+                                                <td>{{ $nurse->address }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin::user::nurse::edit', [
+                                                        'user' => $nurse->user_id,
+                                                        'nurse' => $nurse->id
+                                                    ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                    <form action="{{ route('admin::user::nurse::destroy', [
+                                                        'nurse' => $nurse->id
+                                                    ]) }}" method="post" style="display: inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm mr-25">Delete</button>
                                                     </form>
                                                 </td>
                                             </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6">No nurse found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
