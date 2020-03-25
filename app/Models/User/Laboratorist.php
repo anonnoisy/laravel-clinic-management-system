@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Laboratorist extends Model

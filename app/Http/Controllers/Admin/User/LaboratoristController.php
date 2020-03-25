@@ -175,6 +175,6 @@ class LaboratoristController extends Controller
             return redirect()->back()->with('error_message', 'Sorry, something went wrong, please try again!');
         }
 
-        return redirect()->back()->with('success_message', 'Successfully deleted pharmacist');
+        return redirect()->back()->with('success_message', 'Successfully deleted laboratorist');
     }
 }

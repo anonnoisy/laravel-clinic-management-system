@@ -30,7 +30,8 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Phone</th>
+                                                <th>Mobile phone</th>
+                                                <th>Address</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>

@@ -103,9 +103,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'AccountantController@create')->name('create');
             Route::post('store', 'AccountantController@store')->name('store');
             Route::get('show/{accountant}', 'AccountantController@show')->name('show');
-            Route::get('edit/{accountant}', 'AccountantController@edit')->name('edit');
-            Route::put('update/{accountant}', 'AccountantController@update')->name('update');
-            Route::delete('delete/{accountant}', 'AccountantController@delete')->name('delete');
+            Route::get('{user}/edit/{accountant}', 'AccountantController@edit')->name('edit');
+            Route::put('{user}/update/{accountant}', 'AccountantController@update')->name('update');
+            Route::delete('{user}/delete/{accountant}', 'AccountantController@destroy')->name('destroy');
         });
 
         // Route for receptionist management
