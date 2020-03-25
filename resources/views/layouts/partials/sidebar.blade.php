@@ -22,6 +22,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin::department::index') }}" class="waves-effect">
+                        <div class="d-inline-block icons-sm mr-1"><span style="color: #2fa97c"><i class="fas fa-calendar-check"></i></span></div>
+                        <span>Appointments</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><span style="color: #2fa97c"><i class="fas fa-hospital"></i></span></div>
                         <span>Monitor Hospital</span>
