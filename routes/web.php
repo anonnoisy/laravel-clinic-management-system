@@ -114,9 +114,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'ReceptionistController@create')->name('create');
             Route::post('store', 'ReceptionistController@store')->name('store');
             Route::get('show/{receptionist}', 'ReceptionistController@show')->name('show');
-            Route::get('edit/{receptionist}', 'ReceptionistController@edit')->name('edit');
-            Route::put('update/{receptionist}', 'ReceptionistController@update')->name('update');
-            Route::delete('delete/{receptionist}', 'ReceptionistController@delete')->name('delete');
+            Route::get('{user}/edit/{receptionist}', 'ReceptionistController@edit')->name('edit');
+            Route::put('{user}/update/{receptionist}', 'ReceptionistController@update')->name('update');
+            Route::delete('{user}/delete/{receptionist}', 'ReceptionistController@destroy')->name('destroy');
         });
     });
 
