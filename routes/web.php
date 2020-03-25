@@ -92,9 +92,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'LaboratoristController@create')->name('create');
             Route::post('store', 'LaboratoristController@store')->name('store');
             Route::get('show/{laboratorist}', 'LaboratoristController@show')->name('show');
-            Route::get('edit/{laboratorist}', 'LaboratoristController@edit')->name('edit');
-            Route::put('update/{laboratorist}', 'LaboratoristController@update')->name('update');
-            Route::delete('delete/{laboratorist}', 'LaboratoristController@delete')->name('delete');
+            Route::get('{user}/edit/{laboratorist}', 'LaboratoristController@edit')->name('edit');
+            Route::put('{user}/update/{laboratorist}', 'LaboratoristController@update')->name('update');
+            Route::delete('{user}/delete/{laboratorist}', 'LaboratoristController@destroy')->name('destroy');
         });
 
         // Route for accountants management
