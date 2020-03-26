@@ -22,7 +22,7 @@ class CreateAccountantsTable extends Migration
             $table->string('mobile_phone');
             $table->string('home_phone')->nullable();
             $table->text('address');
-            $table->string('photo_url')->nullable();
+            $table->string('image_url')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

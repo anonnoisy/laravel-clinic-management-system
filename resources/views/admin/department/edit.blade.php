@@ -16,27 +16,28 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Edit Department</h5>
-                    <form action="{{ route('admin::department::update') }}" method="post">
+                    <form action="{{ route('admin::department::update', $department->id) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="col-sm-12 form-group">
                                 <label for="department_name">Department name</label>
-                                <input class="form-control form-control-sm mt-15 @error('email') is-invalid @enderror" id="department_name"type="text" name="name" value="{{ old('name') }}" placeholder="Name of department">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input class="form-control form-control-sm mt-15 @error('email') is-invalid @enderror" id="department_name"type="text" name="name" value="{{ old('name', $department->name) }}" placeholder="Name of department">
                             </div>
                             <div class="col-sm-12 form-group">
                                 <label for="department_description">Department description</label>
-                                <textarea class="form-control form-control-sm mt-15" id="department_description" name="description" placeholder="Description of department" rows="3">{{ old('description') }}</textarea>
+                                <textarea class="form-control form-control-sm mt-15" id="department_description" name="description" placeholder="Description of department" rows="3">{{ old('description', $department->description) }}</textarea>
                             </div>
                             <div class="col-sm-12 form-group">
-                                <label for="department_icon">Department Icon</label>
-                                <input type="file" id="department_icon" class="form-control form-control-sm pb-2"/>
+                                @if(!empty($department->image_url))
+                                    <img src="{{ $department->signed_image_url }}" width="100">
+                                @endif
+                            </div>
+                            <div class="col-sm-12 form-group">
+                                <label for="department_image">Department image</label>
+                                <input type="file" id="department_image" name="image" class="form-control form-control-sm pb-2"/>
                             </div>
                             <div class="col-sm-12">
                                 <button class="btn btn-primary" type="submit">Save department</button>
