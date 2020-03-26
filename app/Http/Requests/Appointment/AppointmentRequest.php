@@ -26,8 +26,8 @@ class AppointmentRequest extends FormRequest
         return [
             'patient_id' => 'required|numeric',
             'doctor_id' => 'required|numeric',
-            'appointment_time' => 'required',
-            'appointment_date' => 'required',
+            'time' => 'required',
+            'date' => 'required',
             'primary_diagnoses' => 'required',
             'status' => 'required'
         ];

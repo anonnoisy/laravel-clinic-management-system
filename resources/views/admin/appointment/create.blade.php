@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Add New Appointment</h5>
                     <a href="{{ route('admin::user::patient::create') }}" class="btn btn-info btn-sm mb-3 mt-2">Create new patient</a>
                     <form action="{{ route('admin::appointment::store') }}" method="post" enctype="multipart/form-data">
@@ -26,7 +27,7 @@
                                 <select name="patient_id" id="patient" class="form-control form-control-sm mt-15 @error('patient_id') is-invalid @enderror">
                                     <option>Select patient</option>
                                     @forelse ($patients as $patient)
-                                        <option value="{{ $patient->id }}">{{ $patient->name }}</option>
+                                        <option value="{{ $patient->id }}" @if(old('patient_id') == $patient->id) selected @endif>{{ $patient->name }}</option>
                                     @empty
                                         <option>No patient found, please create new patient</option>
                                     @endforelse
@@ -42,7 +43,7 @@
                                 <select name="doctor_id" id="doctor" class="form-control form-control-sm mt-15 @error('doctor_id') is-invalid @enderror">
                                     <option>Select doctor</option>
                                     @forelse ($doctors as $doctor)
-                                        <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                        <option value="{{ $doctor->id }}" @if(old('patient_id') == $patient->id) selected @endif>{{ $doctor->name }}</option>
                                     @empty
                                         <option>No doctor found, please add new doctor</option>
                                     @endforelse
@@ -54,18 +55,18 @@
                                 @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
-                                <label for="appointment_time">Appointment time</label>
-                                <input type="text" id="appointment_time" placeholder="HH:mm" name="appointment_time" value="{{ old('appointment_time') }}" class="form-control form-control-sm mt-15 @error('appointment_time') is-invalid @enderror"/>
-                                @error('appointment_time')
+                                <label for="time">Appointment time</label>
+                                <input type="text" id="time" placeholder="HH:mm" name="time" value="{{ old('time') }}" class="form-control form-control-sm mt-15 @error('time') is-invalid @enderror"/>
+                                @error('time')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
-                                <label for="appointment_date">Appointment date</label>
-                                <input type="text" id="appointment_date" placeholder="Enter home phone" name="appointment_date" value="{{ old('appointment_date') }}" class="form-control form-control-sm mt-15 datepicker-here @error('appointment_date') is-invalid @enderror"/>
-                                @error('appointment_date')
+                                <label for="date">Appointment date</label>
+                                <input type="text" id="date" placeholder="Enter appointment date" name="date" value="{{ old('date') }}" data-language="en" class="form-control form-control-sm mt-15 datepicker-here @error('date') is-invalid @enderror"/>
+                                @error('date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

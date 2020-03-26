@@ -48,7 +48,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         Route::get('show/{appointment}', 'AppointmentController@show')->name('show');
         Route::get('edit/{appointment}', 'AppointmentController@edit')->name('edit');
         Route::put('update/{appointment}', 'AppointmentController@update')->name('update');
-        Route::delete('delete/{appointment}', 'AppointmentController@delete')->name('delete');
+        Route::delete('delete/{appointment}', 'AppointmentController@destroy')->name('destroy');
     });
 
     // Route for users

@@ -21,15 +21,53 @@ class Appoitment extends Model
         'status',
     ];
 
+    protected $appends = [
+        'time_formatted',
+        'date_formatted',
+    ];
+
     /**
-     * function for set appointment number or generate unique
+     * function for get appointment time formatted
      *
      * @return object
      * @author Rifky Sulta Karisma A <batuhc105@gmail.com>
      */
-    public function setAppointmentNumberAttribute()
+    public function getTimeFormattedAttribute()
     {
-        $this->attributes['appointment_number'] = "#APMT-" . Carbon::now()->format('ymDHis');
+        return date('H:i A', strtotime($this->time));
+    }
+
+    /**
+     * function for set appointment time
+     *
+     * @return object
+     * @author Rifky Sulta Karisma A <batuhc105@gmail.com>
+     */
+    public function setTimeAttribute($value)
+    {
+        $this->attributes['time'] = date('H:i:s', strtotime($value));
+    }
+
+    /**
+     * function for get appointment date formatted
+     *
+     * @return object
+     * @author Rifky Sulta Karisma A <batuhc105@gmail.com>
+     */
+    public function getDateFormattedAttribute()
+    {
+        return date('m/d/Y', strtotime($this->date));
+    }
+
+    /**
+     * function for set appointment date
+     *
+     * @return object
+     * @author Rifky Sulta Karisma A <batuhc105@gmail.com>
+     */
+    public function setDateAttribute($value)
+    {
+        $this->attributes['date'] = date('Y-m-d H:i:s', strtotime($value));
     }
 
     /**

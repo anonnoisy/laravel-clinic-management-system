@@ -42,14 +42,16 @@
                                                 <td>{{ $appointment->appointment_number }}</td>
                                                 <td>{{ $appointment->patient->name }}</td>
                                                 <td>{{ $appointment->doctor->name }}</td>
-                                                <td>{{ $appointment->time }}</td>
-                                                <td>{{ $appointment->date }}</td>
+                                                <td>{{ $appointment->time_formatted }}</td>
+                                                <td>{{ $appointment->date_formatted }}</td>
                                                 <td>{{ $appointment->status }}</td>
                                                 <td>
                                                     <a href="{{ route('admin::appointment::edit', [
                                                         'appointment' => $appointment->id
                                                     ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="{{ route('admin::appointment::destroy') }}" method="post" style="display: inline">
+                                                    <form action="{{ route('admin::appointment::destroy', [
+                                                        'appointment' => $appointment->id
+                                                    ]) }}" method="post" style="display: inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm mr-25">Delete</button>

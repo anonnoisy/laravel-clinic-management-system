@@ -8,6 +8,7 @@ use App\Models\Appoitment\Appoitment;
 use App\Models\User\{ Doctor, Patient };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class AppointmentController extends Controller
 {
@@ -57,6 +58,7 @@ class AppointmentController extends Controller
     public function store(AppointmentRequest $request)
     {
         DB::transaction(function () use ($request) {
+            $request['appointment_number'] = "#APMT-" . Carbon::now()->format('dmYHis');
             return Appoitment::create($request->all());
         });
 
