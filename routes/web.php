@@ -40,6 +40,17 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         });
     });
 
+    // Route for Appointment
+    Route::prefix('appointment')->name('appointment::')->namespace('Appointment')->group(function() {
+        Route::get('index', 'AppointmentController@index')->name('index');
+        Route::get('create', 'AppointmentController@create')->name('create');
+        Route::post('store', 'AppointmentController@store')->name('store');
+        Route::get('show/{appointment}', 'AppointmentController@show')->name('show');
+        Route::get('edit/{appointment}', 'AppointmentController@edit')->name('edit');
+        Route::put('update/{appointment}', 'AppointmentController@update')->name('update');
+        Route::delete('delete/{appointment}', 'AppointmentController@delete')->name('delete');
+    });
+
     // Route for users
     Route::prefix('users')->name('user::')->namespace('User')->group(function() {
         // Route for doctors management

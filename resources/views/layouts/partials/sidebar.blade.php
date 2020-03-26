@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('admin::department::index') }}" class="waves-effect">
+                    <a href="{{ route('admin::appointment::index') }}" class="waves-effect">
                         <div class="d-inline-block icons-sm mr-1"><span style="color: #2fa97c"><i class="fas fa-calendar-check"></i></span></div>
                         <span>Appointments</span>
                     </a>
