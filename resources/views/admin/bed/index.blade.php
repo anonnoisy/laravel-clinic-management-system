@@ -17,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage beds</h5>
                     <p class="mb-25">Use <code>table-responsive{-sm|-md|-lg|-xl}</code> as needed to create responsive tables up to a particular breakpoint.</p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::bed::create') }}" class="btn btn-gradient-primary mb-3">Add Bed</a>
@@ -36,21 +37,27 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @forelse($beds as $bed)
+                                                <tr>
+                                                    <td>{{ $bed->bed_number }}</td>
+                                                    <td>{{ $bed->bed_currently }}</td>
+                                                    <td>{{ $bed->bed_usage }}</td>
+                                                    <td>{{ $bed->type->name }}</td>
+                                                    <td>{{ $bed->description }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::bed::edit', ['bed' => $bed->id]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::bed::destroy', ['bed' => $bed->id]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
                                             <tr>
-                                                <td>#998BU</td>
-                                                <td>7</td>
-                                                <td>3</td>
-                                                <td>ICU</td>
-                                                <td>Bed description</td>
-                                                <td>
-                                                    <a href="{{ route('admin::bed::edit', ['bed' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
+                                                <td colspan="6">No bed found..</td>
                                             </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

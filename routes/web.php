@@ -150,7 +150,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         Route::get('show/{bed}', 'BedController@show')->name('show');
         Route::get('edit/{bed}', 'BedController@edit')->name('edit');
         Route::put('update/{bed}', 'BedController@update')->name('update');
-        Route::delete('delete/{bed}', 'BedController@delete')->name('delete');
+        Route::delete('delete/{bed}', 'BedController@destroy')->name('destroy');
 
         // Route for bed allotments
         Route::prefix('type')->name('type::')->group(function() {
@@ -171,7 +171,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{allotment}', 'BedAllotmentController@show')->name('show');
             Route::get('edit/{allotment}', 'BedAllotmentController@edit')->name('edit');
             Route::put('update/{allotment}', 'BedAllotmentController@update')->name('update');
-            Route::delete('delete/{allotment}', 'BedAllotmentController@delete')->name('delete');
+            Route::delete('{bed}/delete/{allotment}', 'BedAllotmentController@destroy')->name('destroy');
         });
     });
 

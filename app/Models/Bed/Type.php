@@ -11,4 +11,9 @@ class Type extends Model
         'name',
         'description'
     ];
+
+    public function bed()
+    {
+        return $this->hasMany(Bed::class);
+    }
 }
