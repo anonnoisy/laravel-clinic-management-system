@@ -38,7 +38,7 @@ class PatientController extends Controller
     {
         $bloodGroups = ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'];
         return view('admin.user.patient.create', [
-            'blood_groups', $bloodGroups
+            'blood_groups' => $bloodGroups
         ]);
     }
 
