@@ -37,6 +37,7 @@
                         <li><a href="javascript: void(0);" class="has-arrow">Bed</a>
                             <ul class="sub-menu" aria-expanded="true">
                                 <li><a href="{{ route('admin::bed::index') }}">Bed</a></li>
+                                <li><a href="{{ route('admin::bed::type::index') }}">Types</a></li>
                                 <li><a href="{{ route('admin::bed::allotment::index') }}">Allotment</a></li>
                             </ul>
                         </li>

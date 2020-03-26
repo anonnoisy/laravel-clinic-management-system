@@ -153,6 +153,17 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         Route::delete('delete/{bed}', 'BedController@delete')->name('delete');
 
         // Route for bed allotments
+        Route::prefix('type')->name('type::')->group(function() {
+            Route::get('index', 'BedTypeController@index')->name('index');
+            Route::get('create', 'BedTypeController@create')->name('create');
+            Route::post('store', 'BedTypeController@store')->name('store');
+            Route::get('show/{type}', 'BedTypeController@show')->name('show');
+            Route::get('edit/{type}', 'BedTypeController@edit')->name('edit');
+            Route::put('update/{type}', 'BedTypeController@update')->name('update');
+            Route::delete('delete/{type}', 'BedTypeController@destroy')->name('destroy');
+        });
+
+        // Route for bed allotments
         Route::prefix('allotment')->name('allotment::')->group(function() {
             Route::get('index', 'BedAllotmentController@index')->name('index');
             Route::get('create', 'BedAllotmentController@create')->name('create');
