@@ -26,17 +26,17 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         Route::get('show/{department}', 'DepartmentController@show')->name('show');
         Route::get('edit/{department}', 'DepartmentController@edit')->name('edit');
         Route::put('update/{department}', 'DepartmentController@update')->name('update');
-        Route::delete('delete/{department}', 'DepartmentController@delete')->name('delete');
+        Route::delete('delete/{department}', 'DepartmentController@destroy')->name('destroy');
 
         // Route for department facility
-        Route::prefix('facility')->name('facility::')->group(function() {
+        Route::prefix('{department}/facility')->name('facility::')->group(function() {
             Route::get('index', 'DepartmentFacilityController@index')->name('index');
             Route::get('create', 'DepartmentFacilityController@create')->name('create');
             Route::post('store', 'DepartmentFacilityController@store')->name('store');
             Route::get('show/{facility}', 'DepartmentFacilityController@show')->name('show');
             Route::get('edit/{facility}', 'DepartmentFacilityController@edit')->name('edit');
             Route::put('update/{facility}', 'DepartmentFacilityController@update')->name('update');
-            Route::delete('delete/{facility}', 'DepartmentFacilityController@delete')->name('delete');
+            Route::delete('delete/{facility}', 'DepartmentFacilityController@destroy')->name('destroy');
         });
     });
 
@@ -48,9 +48,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'DoctorController@create')->name('create');
             Route::post('store', 'DoctorController@store')->name('store');
             Route::get('show/{doctor}', 'DoctorController@show')->name('show');
-            Route::get('edit/{doctor}', 'DoctorController@edit')->name('edit');
-            Route::put('update/{doctor}', 'DoctorController@update')->name('update');
-            Route::delete('delete/{doctor}', 'DoctorController@delete')->name('delete');
+            Route::get('{user}/edit/{doctor}', 'DoctorController@edit')->name('edit');
+            Route::put('{user}/update/{doctor}', 'DoctorController@update')->name('update');
+            Route::delete('{user}/delete/{doctor}', 'DoctorController@destroy')->name('destroy');
         });
 
         // Route for nurses management
@@ -59,9 +59,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'NurseController@create')->name('create');
             Route::post('store', 'NurseController@store')->name('store');
             Route::get('show/{nurse}', 'NurseController@show')->name('show');
-            Route::get('edit/{nurse}', 'NurseController@edit')->name('edit');
-            Route::put('update/{nurse}', 'NurseController@update')->name('update');
-            Route::delete('delete/{nurse}', 'NurseController@delete')->name('delete');
+            Route::get('{user}/edit/{nurse}', 'NurseController@edit')->name('edit');
+            Route::put('{user}/update/{nurse}', 'NurseController@update')->name('update');
+            Route::delete('{user}/delete/{nurse}', 'NurseController@destroy')->name('destroy');
         });
 
         // Route for patients management
@@ -70,9 +70,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'PatientController@create')->name('create');
             Route::post('store', 'PatientController@store')->name('store');
             Route::get('show/{patient}', 'PatientController@show')->name('show');
-            Route::get('edit/{patient}', 'PatientController@edit')->name('edit');
-            Route::put('update/{patient}', 'PatientController@update')->name('update');
-            Route::delete('delete/{patient}', 'PatientController@delete')->name('delete');
+            Route::get('{user}/edit/{patient}', 'PatientController@edit')->name('edit');
+            Route::put('{user}/update/{patient}', 'PatientController@update')->name('update');
+            Route::delete('{user}/delete/{patient}', 'PatientController@destroy')->name('destroy');
         });
 
         // Route for pharmacist management
@@ -81,9 +81,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'PharmacistController@create')->name('create');
             Route::post('store', 'PharmacistController@store')->name('store');
             Route::get('show/{pharmacist}', 'PharmacistController@show')->name('show');
-            Route::get('edit/{pharmacist}', 'PharmacistController@edit')->name('edit');
-            Route::put('update/{pharmacist}', 'PharmacistController@update')->name('update');
-            Route::delete('delete/{pharmacist}', 'PharmacistController@delete')->name('delete');
+            Route::get('{user}/edit/{pharmacist}', 'PharmacistController@edit')->name('edit');
+            Route::put('{user}/update/{pharmacist}', 'PharmacistController@update')->name('update');
+            Route::delete('{user}/delete/{pharmacist}', 'PharmacistController@destroy')->name('destroy');
         });
 
         // Route for laboratorist management
@@ -92,9 +92,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'LaboratoristController@create')->name('create');
             Route::post('store', 'LaboratoristController@store')->name('store');
             Route::get('show/{laboratorist}', 'LaboratoristController@show')->name('show');
-            Route::get('edit/{laboratorist}', 'LaboratoristController@edit')->name('edit');
-            Route::put('update/{laboratorist}', 'LaboratoristController@update')->name('update');
-            Route::delete('delete/{laboratorist}', 'LaboratoristController@delete')->name('delete');
+            Route::get('{user}/edit/{laboratorist}', 'LaboratoristController@edit')->name('edit');
+            Route::put('{user}/update/{laboratorist}', 'LaboratoristController@update')->name('update');
+            Route::delete('{user}/delete/{laboratorist}', 'LaboratoristController@destroy')->name('destroy');
         });
 
         // Route for accountants management
@@ -103,9 +103,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'AccountantController@create')->name('create');
             Route::post('store', 'AccountantController@store')->name('store');
             Route::get('show/{accountant}', 'AccountantController@show')->name('show');
-            Route::get('edit/{accountant}', 'AccountantController@edit')->name('edit');
-            Route::put('update/{accountant}', 'AccountantController@update')->name('update');
-            Route::delete('delete/{accountant}', 'AccountantController@delete')->name('delete');
+            Route::get('{user}/edit/{accountant}', 'AccountantController@edit')->name('edit');
+            Route::put('{user}/update/{accountant}', 'AccountantController@update')->name('update');
+            Route::delete('{user}/delete/{accountant}', 'AccountantController@destroy')->name('destroy');
         });
 
         // Route for receptionist management
@@ -114,9 +114,9 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('create', 'ReceptionistController@create')->name('create');
             Route::post('store', 'ReceptionistController@store')->name('store');
             Route::get('show/{receptionist}', 'ReceptionistController@show')->name('show');
-            Route::get('edit/{receptionist}', 'ReceptionistController@edit')->name('edit');
-            Route::put('update/{receptionist}', 'ReceptionistController@update')->name('update');
-            Route::delete('delete/{receptionist}', 'ReceptionistController@delete')->name('delete');
+            Route::get('{user}/edit/{receptionist}', 'ReceptionistController@edit')->name('edit');
+            Route::put('{user}/update/{receptionist}', 'ReceptionistController@update')->name('update');
+            Route::delete('{user}/delete/{receptionist}', 'ReceptionistController@destroy')->name('destroy');
         });
     });
 

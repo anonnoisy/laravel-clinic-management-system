@@ -12,10 +12,12 @@
         "dompdf/dompdf": "^0.8.5",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
+        "google/apiclient": "^2.4",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "spatie/dropbox-api": "^1.12",
         "spatie/laravel-permission": "^3.11"
     },
     "require-dev": {

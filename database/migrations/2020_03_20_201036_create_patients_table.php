@@ -25,7 +25,8 @@ class CreatePatientsTable extends Migration
             $table->string('sex');
             $table->dateTime('birth_date');
             $table->string('age');
-            $table->string('photo_url')->nullable();
+            $table->string('blood_group');
+            $table->string('image_url')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

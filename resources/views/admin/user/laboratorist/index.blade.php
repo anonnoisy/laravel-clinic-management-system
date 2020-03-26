@@ -30,25 +30,45 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Phone</th>
+                                                <th>Mobile phone</th>
+                                                <th>Address</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Photo</td>
-                                                <td>Setyo Wirawan</td>
-                                                <td>doctor@email.com</td>
-                                                <td>+8232124882</td>
-                                                <td>
-                                                    <a href="{{ route('admin::user::laboratorist::edit', ['laboratorist' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($laboratorists as $laboratorist)
+                                                <tr>
+                                                    <td>
+                                                        @if (!empty($laboratorist->signed_image_url))
+                                                            <img src="{{ $laboratorist->signed_image_url }}" alt="laboratorist image" width="100">
+                                                        @else
+                                                            No image
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $laboratorist->name }}</td>
+                                                    <td>{{ $laboratorist->email }}</td>
+                                                    <td>{{ $laboratorist->mobile_phone }}</td>
+                                                    <td>{{ $laboratorist->address }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::user::laboratorist::edit', [
+                                                            'user' => $laboratorist->user_id,
+                                                            'laboratorist' => $laboratorist->id
+                                                            ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::user::laboratorist::destroy', [
+                                                            'user' => $laboratorist->user_id,
+                                                            'laboratorist' => $laboratorist->id
+                                                        ]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="6">No laboratorist found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
