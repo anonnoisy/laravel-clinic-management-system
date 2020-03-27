@@ -182,10 +182,10 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('index', 'BloodBankController@index')->name('index');
             Route::get('create', 'BloodBankController@create')->name('create');
             Route::post('store', 'BloodBankController@store')->name('store');
-            Route::get('show/{bank}', 'BloodBankController@show')->name('show');
-            Route::get('edit/{bank}', 'BloodBankController@edit')->name('edit');
-            Route::put('update/{bank}', 'BloodBankController@update')->name('update');
-            Route::delete('delete/{bank}', 'BloodBankController@delete')->name('delete');
+            Route::get('show/{blood}', 'BloodBankController@show')->name('show');
+            Route::get('edit/{blood}', 'BloodBankController@edit')->name('edit');
+            Route::put('update/{blood}', 'BloodBankController@update')->name('update');
+            Route::delete('delete/{blood}', 'BloodBankController@destroy')->name('destroy');
         });
 
         // Route for blood donor

@@ -17,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage bloods bank</h5>
                     <p class="mb-25">Use <code>table-responsive{-sm|-md|-lg|-xl}</code> as needed to create responsive tables up to a particular breakpoint.</p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::blood::bank::create') }}" class="btn btn-gradient-primary mb-3">Add New Blood</a>
@@ -33,18 +34,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>A+</td>
-                                                <td>10 bags</td>
-                                                <td>
-                                                    <a href="{{ route('admin::blood::bank::edit', ['bank' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($bloods as $blood)
+                                                <tr>
+                                                    <td>{{ $blood->blood_name }}</td>
+                                                    <td>{{ $blood->status }} bags</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::blood::bank::edit', [
+                                                            'blood' => $blood->id
+                                                        ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        @if($blood->is_new == TRUE)
+                                                            <form action="{{ route('admin::blood::bank::destroy', [
+                                                                'blood' => $blood->id
+                                                            ]) }}" method="post" style="display: inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                            </form>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td>No blood bank found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
