@@ -196,7 +196,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{donor}', 'BloodDonorController@show')->name('show');
             Route::get('edit/{donor}', 'BloodDonorController@edit')->name('edit');
             Route::put('update/{donor}', 'BloodDonorController@update')->name('update');
-            Route::delete('delete/{donor}', 'BloodDonorController@delete')->name('delete');
+            Route::delete('delete/{donor}', 'BloodDonorController@destroy')->name('destroy');
         });
     });
 

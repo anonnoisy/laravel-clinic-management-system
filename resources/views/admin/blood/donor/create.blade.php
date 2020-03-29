@@ -16,55 +16,100 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Add New Donor</h5>
-                    <form action="" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin::blood::donor::store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="first_name">First name</label>
-                                <input class="form-control form-control-sm mt-15" id="first_name" type="text" name="first_name" value="{{ old('first_name') }}" placeholder="Enter first name">
+                                <input class="form-control form-control-sm mt-15 @error('first_name') is-invalid @enderror" id="first_name" type="text" name="first_name" value="{{ old('first_name') }}" placeholder="Enter first name">
+                                @error('first_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for=";ast_name">Last name</label>
-                                <input class="form-control form-control-sm mt-15" id="last_name" type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Enter last name">
+                                <input class="form-control form-control-sm mt-15 @error('last_name') is-invalid @enderror" id="last_name" type="text" name="last_name" value="{{ old('last_name') }}" placeholder="Enter last name">
+                                @error('last_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="email">Email</label>
-                                <input class="form-control form-control-sm mt-15" id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Enter email">
+                                <input class="form-control form-control-sm mt-15 @error('email') is-invalid @enderror" id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Enter email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="mobile_phone">Phone</label>
-                                <input type="mobile_phone" id="mobile_phone" placeholder="Enter mobile phone" name="mobile_phone" value="{{ old('mobile_phone') }}" class="form-control form-control-sm pb-2"/>
+                                <input type="mobile_phone" id="mobile_phone" placeholder="Enter mobile phone" name="mobile_phone" value="{{ old('mobile_phone') }}" class="form-control form-control-sm mt-15 @error('mobile_phone') is-invalid @enderror"/>
+                                @error('mobile_phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="sex">Sex</label>
-                                <select name="sex" id="sex" class="form-control form-control-sm pb-2">
+                                <select name="sex" id="sex" class="form-control form-control-sm mt-15 @error('sex') is-invalid @enderror">
                                     <option>Select sex</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                 </select>
+                                @error('sex')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
-                                <label for="age">Age</label>
-                                <input type="text" id="age" placeholder="Enter home phone" name="age" value="{{ old('age') }}" class="form-control form-control-sm pb-2"/>
+                                <label for="birth_date">Birth date</label>
+                                <input type="text" class="form-control form-control-sm mt-15 @error('birth_date') is-invalid @enderror datepicker-here" name="birth_date" value="{{ old('birth_date') }}" placeholder="Enter birth date" data-language="en" />
+                                @error('birth_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="blood_group">Blood group</label>
-                                <select name="blood_group" id="blood_group" class="form-control form-control-sm pb-2">
+                                <select name="blood_group" id="blood_group" class="form-control form-control-sm mt-15 @error('blood_group') is-invalid @enderror">
                                     <option>Select blood group</option>
-                                    <option value="A+">A+</option>
-                                    <option value="A-">A-</option>
-                                    <option value="B+">B+</option>
-                                    <option value="B-">B-</option>
-                                    <option value="O+">O+</option>
-                                    <option value="O-">O-</option>
-                                    <option value="AB+">AB+</option>
-                                    <option value="AB-">AB-</option>
+                                    @foreach ($blood_groups as $blood_group)
+                                        <option value="{{ $blood_group }}" @if (old('blood_group') == $blood_group) selected @endif>{{ $blood_group }}</option>
+                                    @endforeach
                                 </select>
+                                @error('blood_group')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12 col-md-6 form-group">
                                 <label for="last_donation_date">Last donation date</label>
-                                <input type="text" class="form-control form-control-sm mt-15 datepicker-here" name="last_donation_date" value="{{ old('last_donation_date') }}" placeholder="Enter last donation date" data-language="en" />
+                                <input type="text" class="form-control form-control-sm mt-15 @error('last_donation_date') is-invalid @enderror datepicker-here" name="last_donation_date" value="{{ old('last_donation_date') }}" placeholder="Enter last donation date" data-language="en" />
+                                @error('last_donation_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-sm-12 col-md-12 form-group">
+                                <label for="address">Address</label>
+                                <textarea id="address" placeholder="Enter address" name="address" class="form-control form-control-sm mt-15 @error('address') is-invalid @enderror" rows="3">{{ old('address') }}</textarea>
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="col-sm-12">
                                 <button class="btn btn-primary" type="submit">Save donor</button>

@@ -36,22 +36,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Setyo Wirawan</td>
-                                                <td>21</td>
-                                                <td>Male</td>
-                                                <td>A+</td>
-                                                <td>18 May. 2020</td>
-                                                <td>
-                                                    <a href="{{ route('admin::blood::donor::show', ['donor' => 1]) }}" class="btn btn-primary btn-sm mr-25">Show</a>
-                                                    <a href="{{ route('admin::blood::donor::edit', ['donor' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($donors as $donor)
+                                                <tr>
+                                                    <td>{{ $donor->name }}</td>
+                                                    <td>{{ $donor->age }}</td>
+                                                    <td>{{ $donor->sex }}</td>
+                                                    <td>{{ $donor->blood_group }}</td>
+                                                    <td>{{ $donor->last_donation_date_formatted }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::blood::donor::show', [
+                                                            'donor' => $donor->id
+                                                        ]) }}" class="btn btn-primary btn-sm mr-25">Show</a>
+                                                        <a href="{{ route('admin::blood::donor::edit', [
+                                                            'donor' => $donor->id
+                                                        ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::blood::donor::destroy', [
+                                                            'donor' => $donor->id
+                                                        ]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td>No donor found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
