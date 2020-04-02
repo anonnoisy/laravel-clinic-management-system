@@ -208,7 +208,18 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
         Route::get('show/{medicine}', 'MedicineController@show')->name('show');
         Route::get('edit/{medicine}', 'MedicineController@edit')->name('edit');
         Route::put('update/{medicine}', 'MedicineController@update')->name('update');
-        Route::delete('delete/{medicine}', 'MedicineController@delete')->name('delete');
+        Route::delete('delete/{medicine}', 'MedicineController@destroy')->name('destroy');
+
+        // Route for medicine category
+        Route::prefix('category')->name('category::')->group(function() {
+            Route::get('index', 'MedicineCategoryController@index')->name('index');
+            Route::get('create', 'MedicineCategoryController@create')->name('create');
+            Route::post('store', 'MedicineCategoryController@store')->name('store');
+            Route::get('show/{category}', 'MedicineCategoryController@show')->name('show');
+            Route::get('edit/{category}', 'MedicineCategoryController@edit')->name('edit');
+            Route::put('update/{category}', 'MedicineCategoryController@update')->name('update');
+            Route::delete('delete/{category}', 'MedicineCategoryController@destroy')->name('destroy');
+        });
 
         // Route for medicine sales
         Route::prefix('sale')->name('sale::')->group(function() {
@@ -218,7 +229,7 @@ Route::prefix('admin')->middleware('auth')->name('admin::')->namespace('Admin')-
             Route::get('show/{sale}', 'MedicineSaleController@show')->name('show');
             Route::get('edit/{sale}', 'MedicineSaleController@edit')->name('edit');
             Route::put('update/{sale}', 'MedicineSaleController@update')->name('update');
-            Route::delete('delete/{sale}', 'MedicineSaleController@delete')->name('delete');
+            Route::delete('delete/{sale}', 'MedicineSaleController@destroy')->name('destroy');
         });
     });
 

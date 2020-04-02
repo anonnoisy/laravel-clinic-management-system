@@ -17,6 +17,7 @@
         <div class="row">
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
+                    @include('layouts.components.alert')
                     <h5 class="mb-10">Manage Medicines</h5>
                     <p class="mb-25">Use <code>table-responsive{-sm|-md|-lg|-xl}</code> as needed to create responsive tables up to a particular breakpoint.</p>
                     <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::medicine::create') }}" class="btn btn-gradient-primary mb-3">Add Medicine</a>
@@ -39,24 +40,34 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Bodrex</td>
-                                                <td>Sakit kepala</td>
-                                                <td>12000</td>
-                                                <td>12 Packs</td>
-                                                <td>3 Packs</td>
-                                                <td>PT Bodrex Asia Tbk</td>
-                                                <td>Description of medicine</td>
-                                                <td>Active</td>
-                                                <td>
-                                                    <a href="{{ route('admin::medicine::edit', ['medicine' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button class="btn btn-danger btn-sm mr-25">Delete</button>
-                                                    </form>
-                                                </td>
-                                            </tr>
+                                            @forelse ($medicines as $medicine)
+                                                <tr>
+                                                    <td>{{ $medicine->name }}</td>
+                                                    <td>{{ $medicine->category()->first()->name }}</td>
+                                                    <td>{{ $medicine->price }}</td>
+                                                    <td>{{ $medicine->quantity }}</td>
+                                                    <td></td>
+                                                    <td>{{ $medicine->manufacture_company }}</td>
+                                                    <td>{{ $medicine->description }}</td>
+                                                    <td>{{ $medicine->status }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin::medicine::edit', [
+                                                            'medicine' => $medicine->id
+                                                        ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                        <form action="{{ route('admin::medicine::destroy', [
+                                                            'medicine' => $medicine->id
+                                                        ]) }}" method="post" style="display: inline">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger btn-sm mr-25">Delete</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td>No medicine found..</td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>

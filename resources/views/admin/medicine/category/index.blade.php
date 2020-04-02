@@ -5,7 +5,7 @@
 <nav class="hk-breadcrumb" aria-label="breadcrumb">
     <ol class="breadcrumb breadcrumb-light bg-transparent">
         <li class="breadcrumb-item"><a href="#">Clinic</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Manage medicine sales</li>
+        <li class="breadcrumb-item active" aria-current="page">Manage medicine categories</li>
     </ol>
 </nav>
 <!-- /Breadcrumb -->
@@ -18,9 +18,8 @@
             <div class="col-xl-12">
                 <section class="hk-sec-wrapper">
                     @include('layouts.components.alert')
-                    <h5 class="mb-10">Manage Medicine Sales</h5>
-                    <p class="mb-25">Use <code>table-responsive{-sm|-md|-lg|-xl}</code> as needed to create responsive tables up to a particular breakpoint.</p>
-                    <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::medicine::sale::create') }}" class="btn btn-gradient-primary mb-3">Add Medicine Sale</a>
+                    <h5 class="mb-10">Manage medicine categories</h5>
+                    <a class="btn btn-primary btn-sm mb-2" href="{{ route('admin::medicine::category::create') }}" class="btn btn-gradient-primary mb-3">Add Medicine Category</a>
                     <div class="row">
                         <div class="col-sm">
                             <div class="table-wrap">
@@ -29,32 +28,24 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Patient</th>
-                                                <th>Medicines</th>
-                                                <th>Total Price</th>
-                                                <th>Total quantity</th>
-                                                <th>Notes</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
                                                 <th>Options</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @forelse()
+                                            @forelse($categories as $index => $category)
                                             <tr>
-                                                <td>{{ $sale->sale_number }}</td>
-                                                <td>{{ $sale->patient->name }}</td>
+                                                <td>{{ $index+1 }}</td>
+                                                <td>{{ $category->name }}</td>
+                                                <td>{{ $category->description }}</td>
                                                 <td>
-                                                    @forelse($sale->medicines as $medicine)
-                                                        {{ $medicine->name }},
-                                                    @empty
-                                                        No medicines
-                                                    @endforelse
-                                                </td>
-                                                <td>{{ $sale->price }}</td>
-                                                <td>{{ $sale->quantity }}</td>
-                                                <td>{{ $sale->notes }}</td>
-                                                <td>
-                                                    <a href="{{ route('admin::medicine::sale::edit', ['sale' => 1]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
-                                                    <form action="" method="post" style="display: inline">
+                                                    <a href="{{ route('admin::medicine::category::edit', [
+                                                        'category' => $category->id
+                                                    ]) }}" class="btn btn-info btn-sm mr-25">Edit</a>
+                                                    <form action="{{ route('admin::medicine::category::destroy', [
+                                                        'category' => $category->id
+                                                    ]) }}" method="post" style="display: inline">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button class="btn btn-danger btn-sm mr-25">Delete</button>
@@ -63,7 +54,7 @@
                                             </tr>
                                             @empty
                                                 <tr>
-                                                    <td>No medicine sales found..</td>
+                                                    <td colspan="4">No medicine category found..</td>
                                                 </tr>
                                             @endforelse
                                         </tbody>

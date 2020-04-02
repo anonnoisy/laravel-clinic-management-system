@@ -50,6 +50,7 @@
                         <li><a href="javascript: void(0);" class="has-arrow">Medicine</a>
                             <ul class="sub-menu" aria-expanded="true">
                                 <li><a href="{{ route('admin::medicine::index') }}">Medicine</a></li>
+                                <li><a href="{{ route('admin::medicine::category::index') }}">Category</a></li>
                                 <li><a href="{{ route('admin::medicine::sale::index') }}">Sales</a></li>
                             </ul>
                         </li>
